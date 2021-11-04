@@ -1,0 +1,17 @@
+showing user!
+
+<%= link_to "Edit User", edit_user_registration_path(@user), class: "" %>
+
+<%= simple_form_for(@user) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="form-check form-switch">
+         <%= f.input :darkmode, as: :boolean, checked_value: :true, unchecked_value: :false %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Update" %>
+  </div>
+<% end %>
