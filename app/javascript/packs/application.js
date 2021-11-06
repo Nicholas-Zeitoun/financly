@@ -32,3 +32,8 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
 });
+
+$(document).on("click", "#toggle-switch", function() {
+  console.log("form clicked!");
+   $("#dm-form").submit();
+});

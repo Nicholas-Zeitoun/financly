@@ -2,11 +2,11 @@ showing user!
 
 <%= link_to "Edit User", edit_user_registration_path(@user), class: "" %>
 
-<%= simple_form_for(@user) do |f| %>
+<%= simple_form_for(@user, remote: true, html: { id: 'dm-form'} ) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <div class="form-check form-switch">
+    <div class="form-check form-switch" id="toggle-switch">
          <%= f.input :darkmode, as: :boolean, checked_value: :true, unchecked_value: :false %>
     </div>
   </div>

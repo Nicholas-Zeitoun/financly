@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def show
@@ -7,17 +8,21 @@ class UsersController < ApplicationController
     # authorize @user
   end
 
+  def toggle
+    raise
+  end
+
   # PATCH/PUT /seasons/1
   def update
     #if @user.update(user_params)
       if params[:user][:darkmode] == "true"
         @user.darkmode = true;
         @user.save!
-        redirect_to @user, notice: 'Dark mode was successfully enabled.'
+        redirect_to @user # , notice: 'Dark mode was successfully enabled.'
       else
         @user.darkmode = false;
         @user.save!
-        redirect_to @user, notice: 'Dark mode was successfully disabled.'
+        redirect_to @user # , notice: 'Dark mode was successfully disabled.'
       end
     #else
     #  render :root
