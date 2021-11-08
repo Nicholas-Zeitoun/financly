@@ -1,15 +1,11 @@
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token # should probably find a better solution to this!!!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def show
     @user = User.find(params[:id])
     @users = User.all
     # authorize @user
-  end
-
-  def toggle
-    raise
   end
 
   # PATCH/PUT /seasons/1

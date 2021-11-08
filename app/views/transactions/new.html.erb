@@ -1,5 +1,26 @@
 <h1>New Transaction</h1>
 
-<%= render 'form', transaction: @transaction %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card border-danger p-3">
+        <h3>Personal Expense</h3>
+        <%= render 'personal_expense_form', transaction: @transaction %>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card border-danger p-3">
+        <h3>Living Expense</h3>
+        <%= render 'living_expense_form', transaction: @transaction %>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card border-success p-3">
+        <h3>Income</h3>
+        <%= render 'income_form', transaction: @transaction %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'Back', transactions_path %>
