@@ -1,38 +1,135 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Transactions</h1>
+  <div class="row">
+    <div class="col-3">
+      <!-- Navigation Pane -->
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">All Transactions</a>
+        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal Expenditure</a>
+        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Living Expenditure</a>
+        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Income</a>
+      </div>
+    </div>
+    <div class="col-9">
+      <!-- Transactions Pane -->
+      <div class="tab-content" id="v-pills-tabContent">
+        <!-- All Transactions -->
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          <h1>Transactions</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Amount</th>
-      <th>Date</th>
-      <th>Category</th>
-      <th>Description</th>
-      <th>Liper</th>
-      <th>Ioe</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Liper</th>
+                  <th>Ioe</th>
+                  <th colspan="3"></th>
+                </tr>
+              </thead>
 
-  <tbody>
-    <% @transactions.each do |transaction| %>
-      <tr>
-        <td><%= transaction.name %></td>
-        <td><%= transaction.amount %></td>
-        <td><%= transaction.date %></td>
-        <td><%= transaction.category %></td>
-        <td><%= transaction.description %></td>
-        <td><%= transaction.liper %></td>
-        <td><%= transaction.ioe %></td>
-        <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <tbody>
+              <% @transactions.each do |transaction| %>
+                <tr>
+                  <td><%= transaction.name %></td>
+                  <td><%= transaction.amount %></td>
+                  <td><%= transaction.date %></td>
+                  <td><%= transaction.category %></td>
+                  <td><%= transaction.description %></td>
+                  <td><%= transaction.liper %></td>
+                  <td><%= transaction.ioe %></td>
+                  <td><%= link_to 'Show', transaction %></td>
+                  <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+                  <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <!-- Personal Transactions -->
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          <% @personal_transactions.each do |p_transaction| %>
+            <div class="card p-3 mb-3">
+              <div class="row">
+                <div class="col-3">
+                  <%= p_transaction.amount %>
+                </div>
+                <div class="col-3">
+                  <%= p_transaction.name %>
+                </div>
+                <div class="col-3">
+                  <%= p_transaction.date %>
+                </div>
+                <div class="col-3">
+                  <%= p_transaction.category %>
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <i class="fas fa-external-link-alt"></i>
+              <%#= link_to "", transaction_path(p_transaction), class: "stretched-link" %>
+            </div>
+          <% end %>
+        </div>
+        <!-- Living Transactions -->
+        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+          <% @living_transactions.each do |l_transaction| %>
+            <div class="card p-3 mb-3">
+              <div class="row">
+                <div class="col-3">
+                  <%= l_transaction.amount %>
+                </div>
+                <div class="col-3">
+                  <%= l_transaction.name %>
+                </div>
+                <div class="col-3">
+                  <%= l_transaction.date %>
+                </div>
+                <div class="col-3">
+                  <%= l_transaction.category %>
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <i class="fas fa-external-link-alt"></i>
+              <%#= link_to "", transaction_path(p_transaction), class: "stretched-link" %>
+            </div>
+          <% end %>
+        </div>
+        <!-- Income -->
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+          <% @income_transactions.each do |i_transaction| %>
+            <div class="card p-3 mb-3">
+              <div class="row">
+                <div class="col-3">
+                  <%= i_transaction.amount %>
+                </div>
+                <div class="col-3">
+                  <%= i_transaction.name %>
+                </div>
+                <div class="col-3">
+                  <%= i_transaction.date %>
+                </div>
+                <div class="col-3">
+                  <%= i_transaction.category %>
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <i class="fas fa-external-link-alt"></i>
+              <%#= link_to "", transaction_path(p_transaction), class: "stretched-link" %>
+            </div>
+          <% end %>
+        </div>
+    </div>
+  </div>
+
+</div>
+
+
 
 <br>
 

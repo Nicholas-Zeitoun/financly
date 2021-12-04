@@ -4,6 +4,9 @@ class TransactionsController < ApplicationController
   # GET /transactions or /transactions.json
   def index
     @transactions = Transaction.all
+    @personal_transactions = Transaction.all.select { |m| m.liper == "personal" }
+    @living_transactions = Transaction.all.select { |m| m.liper == "living" }
+    @income_transactions = Transaction.all.select { |m| m.ioe == "income" }
   end
 
   # GET /transactions/1 or /transactions/1.json
