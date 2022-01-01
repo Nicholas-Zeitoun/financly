@@ -14,11 +14,11 @@ class UsersController < ApplicationController
       if params[:user][:darkmode] == "true"
         @user.darkmode = true;
         @user.save!
-        redirect_to @user # , notice: 'Dark mode was successfully enabled.'
+        redirect_to @user#, notice: 'Dark mode was successfully enabled.'
       else
         @user.darkmode = false;
         @user.save!
-        redirect_to @user # , notice: 'Dark mode was successfully disabled.'
+        redirect_to @user#,notice: 'Dark mode was successfully disabled.'
       end
     #else
     #  render :root

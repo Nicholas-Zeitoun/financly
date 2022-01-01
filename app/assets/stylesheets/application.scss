@@ -25,3 +25,17 @@
 .light-mode {
   color: #707070;
 }
+
+.derp {
+  width: 100px;
+  height: 100px;
+}
+
+.alert-info-f {
+  background: #000;
+  position: fixed;
+  width: 250px;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+}

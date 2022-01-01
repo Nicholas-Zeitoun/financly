@@ -24,6 +24,7 @@ require("channels")
 
 // External imports
 import "bootstrap";
+import { initSweetalert } from '../plugins/init_sweetalert';
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -37,3 +38,10 @@ $(document).on("click", "#toggle-switch", function() {
   console.log("form clicked!");
    $("#dm-form").submit();
 });
+
+
+// initSweetalert('#sweet-alert-demo', {
+//   title: "A nice alert",
+//   text: "This is a great alert, isn't it?",
+//   icon: "success"
+// });
