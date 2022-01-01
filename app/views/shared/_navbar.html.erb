@@ -13,9 +13,15 @@
   <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
       <% if user_signed_in? %>
         <div class="navbar-nav">
-          <%= link_to "Add Transaction", new_transaction_path, class: "nav-item nav-link" %>
-          <%= link_to "View Transactions", transactions_path, class: "nav-item nav-link" %>
-          <%= link_to "Tracking", transactions_path, class: "nav-item nav-link" %>
+          <div class="mr-4">
+            <%= link_to "Add Transaction", new_transaction_path, class: "nav-item nav-link" %>
+          </div>
+          <div class="mr-4">
+            <%= link_to "View Transactions", transactions_path, class: "nav-item nav-link" %>
+          </div>
+          <div class="mr-4">
+            <%= link_to "Tracking", transactions_path, class: "nav-item nav-link" %>
+          </div>
         </div>
         <a class="nav-item">
           <%= link_to user_path(current_user), class: "d-flex align-items-center navbar-brand" do %>

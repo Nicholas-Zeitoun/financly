@@ -1,8 +1,18 @@
+<!-- Light/Dark Mode Setting -->
+<% screen_mode = 'light-mode' %>
+<% if user_signed_in? %>
+  <% if (current_user.darkmode) %>
+    <% screen_mode = 'dark-mode' %>
+  <% else %>
+    <% screen_mode = 'light-mode' %>
+  <% end %>
+<% end %>
+
 <%= simple_form_for(@transaction) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
+  <div class="form-inputs income-form-<%= screen_mode %>">
     <%= f.input :name %>
     <%= f.input :amount %>
     <%= f.input :date %>
@@ -12,7 +22,7 @@
     <%= f.input :ioe, :as => :hidden, :input_html => { :value => "income" } %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Submit", class: "btn btn-success" %>
+  <div class="form-actions d-flex justify-content-center">
+    <%= f.button :submit, "Submit", class: "btn btn-success income-button" %>
   </div>
 <% end %>

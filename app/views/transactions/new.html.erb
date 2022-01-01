@@ -1,26 +1,45 @@
-<h1>New Transaction</h1>
+<!-- Light/Dark Mode Setting -->
+<% screen_mode = 'light-mode' %>
+<% if user_signed_in? %>
+  <% if (current_user.darkmode) %>
+    <% screen_mode = 'dark-mode' %>
+  <% else %>
+    <% screen_mode = 'light-mode' %>
+  <% end %>
+<% end %>
 
 <div class="container">
-  <div class="row">
+  <div class="row mt-4">
     <div class="col-sm">
-      <div class="card border-danger p-3">
-        <h3>Personal Expense</h3>
-        <%= render 'personal_expense_form', transaction: @transaction %>
-      </div>
+      <h3>Expenses</h3>
     </div>
     <div class="col-sm">
-      <div class="card border-danger p-3">
-        <h3>Living Expense</h3>
-        <%= render 'living_expense_form', transaction: @transaction %>
-      </div>
     </div>
     <div class="col-sm">
-      <div class="card border-success p-3">
-        <h3>Income</h3>
-        <%= render 'income_form', transaction: @transaction %>
-      </div>
+      <h3>Income</h3>
     </div>
   </div>
 </div>
+<hr>
+  <div class="container pt-4">
+    <div class="row flex justify-content-center mt-4">
+      <div class="col-sm">
+        <div class="expense-card-<%= screen_mode %> p-4">
+          <%= render 'personal_expense_form', transaction: @transaction %>
+        </div>
+        <p class="mt-4">Personal Expense</p>
+      </div>
+      <div class="col-sm">
+        <div class="expense-card-<%= screen_mode %> p-4">
+          <%= render 'living_expense_form', transaction: @transaction %>
+        </div>
+        <p class="mt-4">Living Expense</p>
+      </div>
+      <div class="col-sm">
+        <div class="income-card-<%= screen_mode %> p-4">
+          <%= render 'income_form', transaction: @transaction %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<%= link_to 'Back', transactions_path %>
