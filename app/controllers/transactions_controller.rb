@@ -28,6 +28,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
+        @transaction = Transaction.new
         format.html { render 'transactions/new', notice: "Transaction was successfully created." }
         # format.html { redirect_to @transaction, notice: "Transaction was successfully created." }
         # format.json { render :show, status: :created, location: @transaction }
