@@ -9,6 +9,33 @@ class TransactionsController < ApplicationController
     @income_transactions = Transaction.all.select { |m| m.ioe == "income" }
   end
 
+  def tracking
+    @transactions = Transaction.all
+    @personal_transactions = Transaction.all.select { |m| m.liper == "personal" }
+    @living_transactions = Transaction.all.select { |m| m.liper == "living" }
+    @income_transactions = Transaction.all.select { |m| m.ioe == "income" }
+
+    @expenses = 0
+    @living_expenses = 0
+    @personal_expenses = 0
+    @income = 0
+    @transactions.each do |transaction|
+      if transaction.ioe == "expense"
+        case transaction.liper
+        when "personal"
+          @personal_expenses += transaction.amount
+        when "living"
+          @living_expenses += transaction.amount
+        else
+          # @expenses += transaction.amount
+        end
+        @expenses = (@personal_expenses + @living_expenses)
+      else
+        @income += transaction.amount
+      end
+    end
+  end
+
   # GET /transactions/1 or /transactions/1.json
   def show
   end
