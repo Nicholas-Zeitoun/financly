@@ -1,7 +1,81 @@
-<h3>Expenses</h3>
-<h3>$<%= '%1.2f' % @expenses %></h3>
-<p>Personal: $<%= '%1.2f' % @personal_expenses %></p>
-<p>Living: $<%= '%1.2f' % @living_expenses %></p>
+<p id="notice"><%= notice %></p>
 
-<h3>Income</h3>
-<h3>$<%= '%1.2f' % @income %></h3>
+  <div class="row">
+    <div class="col-3">
+      <!-- Navigation Pane -->
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Overview</a>
+        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Monthly</a>
+        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Yearly</a>
+        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Categories</a>
+        <a class="nav-link" id="v-pills-trends-tab" data-toggle="pill" href="#v-pills-trends" role="tab" aria-controls="v-pills-trends" aria-selected="false">Trends</a>
+      </div>
+    </div>
+    <div class="col-9">
+      <!-- Tracking Pane -->
+      <div class="tab-content" id="v-pills-tabContent">
+        <!-- Overview -->
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          <h3>Expenses</h3>
+          <h3>$<%= '%1.2f' % @expenses %></h3>
+          <p>Personal: $<%= '%1.2f' % @personal_expenses %></p>
+          <p>Living: $<%= '%1.2f' % @living_expenses %></p>
+
+          <h3>Income</h3>
+          <h3>$<%= '%1.2f' % @income %></h3>
+        </div>
+        <!-- Monthly -->
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          <h3>Monthly</h3>
+          <% @monthly_transactions.each do |key, value| %>
+            <h4> <%= "#{key.strftime("%B %Y")}" %> </h4>
+            <strong>Expenses</strong>
+            <% value[0].each do |transaction| %>
+              <p><%= transaction.name %> $<%= '%1.2f' % transaction.amount %> <%= transaction.date %> </p>
+            <% end %>
+            <strong>Income</strong>
+            <% value[1].each do |transaction| %>
+              <p><%= transaction.name %> $<%= '%1.2f' % transaction.amount %> <%= transaction.date %> </p>
+            <% end %>
+          <% end %>
+        </div>
+        <!-- Yearly -->
+        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+          <h3>Yearly</h3>
+          <% @yearly_transactions.each do |key, value| %>
+            <h4> <%= "#{key.strftime("%Y")}" %> </h4>
+            <strong>Expenses $<%= '%1.2f' % value[3] %> </strong>
+            <% value[0].each do |transaction| %>
+              <p><%= transaction.name %> $<%= '%1.2f' % transaction.amount %> <%= transaction.date %> </p>
+            <% end %>
+            <strong>Income $<%= '%1.2f' % value[2] %></strong>
+            <% value[1].each do |transaction| %>
+              <p><%= transaction.name %> $<%= '%1.2f' % transaction.amount %> <%= transaction.date %> </p>
+            <% end %>
+          <% end %>
+        </div>
+        <!-- Categories -->
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+          <h3>Expenses</h3>
+          <% @categorized_expenses.sort.to_h.each do |key, value| %>
+            <h4><%= "#{key}" %></h4>
+            <% value.each do |transaction| %>
+              <p><%= transaction.name %> $<%= '%1.2f' % transaction.amount %> <%= transaction.date %> </p>
+            <% end %>
+          <% end %>
+          <h3>Income</h3>
+          <% @categorized_income.sort.to_h.each do |key, value| %>
+            <h4><%= "#{key}" %></h4>
+            <% value.each do |transaction| %>
+              <p><%= transaction.name %> $<%= '%1.2f' % transaction.amount %> <%= transaction.date %> </p>
+            <% end %>
+          <% end %>
+        </div>
+        <!-- Trends -->
+        <div class="tab-pane fade" id="v-pills-trends" role="tabpanel" aria-labelledby="v-pills-trends-tab">
+
+        </div>
+    </div>
+  </div>
+
+</div>

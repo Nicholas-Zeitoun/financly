@@ -3,14 +3,15 @@ class TransactionsController < ApplicationController
 
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.all
-    @personal_transactions = Transaction.all.select { |m| m.liper == "personal" }
-    @living_transactions = Transaction.all.select { |m| m.liper == "living" }
-    @income_transactions = Transaction.all.select { |m| m.ioe == "income" }
+    @transactions = Transaction.order('date DESC')
+    @personal_transactions = Transaction.order('date DESC').select { |m| m.liper == "personal" }
+    @living_transactions = Transaction.order('date DESC').select { |m| m.liper == "living" }
+    @income_transactions = Transaction.order('date DESC').select { |m| m.ioe == "income" }
   end
 
   def tracking
     @transactions = Transaction.all
+    @ordered_transactions = Transaction.order('date DESC')
     @personal_transactions = Transaction.all.select { |m| m.liper == "personal" }
     @living_transactions = Transaction.all.select { |m| m.liper == "living" }
     @income_transactions = Transaction.all.select { |m| m.ioe == "income" }
@@ -32,6 +33,65 @@ class TransactionsController < ApplicationController
         @expenses = (@personal_expenses + @living_expenses)
       else
         @income += transaction.amount
+      end
+    end
+
+    # Monthly Stuff
+    @monthly = @transactions.group_by_month(:date).count
+    t_index = 0
+    @monthly_transactions = {}
+    @monthly.reverse_each do |key, value|
+      @monthly_expenses = []
+      @monthly_income = []
+      @ioe = []
+      value.times do
+        case @ordered_transactions[t_index].ioe
+        when 'income'
+          @monthly_income.push(@ordered_transactions[t_index])
+        when 'expense'
+          @monthly_expenses.push(@ordered_transactions[t_index])
+        end
+        t_index += 1
+      end
+      @ioe.push(@monthly_expenses).push(@monthly_income)
+      @monthly_transactions[key] = @ioe
+    end
+
+    # Yearly Stuff
+    @yearly = @transactions.group_by_year(:date).count
+    y_index = 0
+    @yearly_transactions = {}
+    @yearly.reverse_each do |key, value|
+      @yearly_expenses = []
+      @yearly_income = []
+      @yearly_expenses_total = 0
+      @yearly_income_total = 0
+      @yioe = []
+      value.times do
+        case @ordered_transactions[y_index].ioe
+        when 'income'
+          @yearly_income.push(@ordered_transactions[y_index])
+          @yearly_income_total += @ordered_transactions[y_index].amount
+        when 'expense'
+          @yearly_expenses.push(@ordered_transactions[y_index])
+          @yearly_expenses_total += @ordered_transactions[y_index].amount
+        end
+        y_index += 1
+      end
+      @yioe.push(@yearly_expenses).push(@yearly_income)
+      @yioe.push(@yearly_income_total).push(@yearly_expenses_total)
+      @yearly_transactions[key] = @yioe
+    end
+
+    # Category stuff
+    @categorized_expenses = Hash.new {|h,k| h[k] = [] }
+    @categorized_income = Hash.new {|h,k| h[k] = [] }
+    @transactions.each do |transaction|
+      case transaction.ioe
+      when 'income'
+        @categorized_income[transaction.category].push(transaction)
+      when 'expense'
+        @categorized_expenses[transaction.category].push(transaction)
       end
     end
   end
