@@ -65,3 +65,124 @@
     transition: opacity 300ms linear;
   }
 }
+
+// Transaction Index and Dashboard Stylings
+.transaction-dashboard {
+  min-height: 100vh;
+}
+
+.td-left-pane-dark-mode {
+  background: #23272B;
+  border-right: 1px solid #707070;
+
+  .td-nav-pane-dark-mode {
+    min-height: 250px;
+    margin-top: 15vh;
+  }
+
+  .td-nav-link-dark-mode {
+    background: #23272B !important;
+    color: #bbb !important;
+    &:hover {
+      opacity: 70%;
+      -webkit-transition: opacity 300ms linear;
+      -ms-transition: opacity 300ms linear;
+      transition: opacity 300ms linear;
+    }
+  }
+
+  .td-nav-link-dark-mode.active {
+    background: #23272B !important;
+    color: #bbb !important;
+    opacity: 50%;
+  }
+}
+
+.td-left-pane-light-mode {
+  background: #FFF;
+  border-right: 1px solid #ccc;
+
+  .td-nav-pane-light-mode {
+    min-height: 250px;
+    margin-top: 15vh;
+  }
+
+  .td-nav-link-light-mode {
+    background: #FFF !important;
+    color: #707070 !important;
+    &:hover {
+      opacity: 70%;
+      -webkit-transition: opacity 300ms linear;
+      -ms-transition: opacity 300ms linear;
+      transition: opacity 300ms linear;
+    }
+  }
+
+  .td-nav-link-light-mode.active {
+    background: #FFF !important;
+    color: #707070 !important;
+    opacity: 50%;
+  }
+}
+
+// Transaction Card Styling
+.transaction-card-dark-mode {
+  max-width: 75%;
+  background: #23272B !important;
+  color: #bbb !important;
+  border-radius: 3px;
+  &:hover {
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.4);
+    transition: 300ms linear;
+  }
+
+}
+
+.transaction-card-light-mode {
+  max-width: 75%;
+  color: #707070 !important;
+  border-radius: 3px;
+  &:hover {
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.4);
+    transition: 300ms linear;
+  }
+
+}
+
+.transaction-amount-expense {
+  color: #E97B86 !important;
+  font-size: 24px;
+}
+
+.transaction-amount-income {
+  color: #74C686 !important;
+  font-size: 24px;
+}
+
+.ioe-expense {
+  border: 1px solid #E97B86 !important;
+}
+
+.ioe-income {
+  border: 1px solid #74C686 !important;
+}
+
+// Transaction Modal Styling
+.transaction-modal-dark-mode.ioe-expense {
+    background: #23272B !important;
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.4);
+    border: 1px solid #E97B86 !important;
+    border-radius: 3px;
+    color: #bbbbbb;
+}
+
+.transaction-modal-dark-mode.ioe-income {
+    background: #23272B !important;
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.4);
+    border: 1px solid #74C686 !important;
+    border-radius: 3px;
+    color: #bbbbbb;
+}
+
+
+

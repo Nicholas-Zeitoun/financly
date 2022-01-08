@@ -1,0 +1,41 @@
+  <div class="row transaction-dashboard">
+    <div class="col-3 td-left-pane-dark-mode">
+      <!-- Navigation Pane -->
+      <div class="nav flex-column nav-pills td-nav-pane-dark-mode justify-content-between text-right" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link td-nav-link-dark-mode active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">All Transactions</a>
+        <a class="nav-link td-nav-link-dark-mode" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal Expenditure</a>
+        <a class="nav-link td-nav-link-dark-mode" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Living Expenditure</a>
+        <a class="nav-link td-nav-link-dark-mode" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Income</a>
+      </div>
+    </div>
+    <div class="col-9 overflow-auto vh-100 pb-4">
+      <!-- Transactions Pane -->
+      <div class="tab-content" id="v-pills-tabContent">
+        <!-- All Transactions -->
+        <div class="tab-pane fade show active p-4" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          <% @transactions.each do |transaction| %>
+            <%= render 'transaction_card', transaction: transaction %>
+          <% end %>
+        </div>
+        <!-- Personal Transactions -->
+        <div class="tab-pane fade p-4" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          <% @personal_transactions.each do |p_transaction| %>
+            <%= render 'p_transaction_card', transaction: p_transaction %>
+          <% end %>
+        </div>
+        <!-- Living Transactions -->
+        <div class="tab-pane fade p-4" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+          <% @living_transactions.each do |l_transaction| %>
+            <%= render 'l_transaction_card', transaction: l_transaction %>
+          <% end %>
+        </div>
+        <!-- Income -->
+        <div class="tab-pane fade p-4" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+          <% @income_transactions.each do |i_transaction| %>
+            <%= render 'i_transaction_card', transaction: i_transaction %>
+          <% end %>
+        </div>
+    </div>
+  </div>
+
+</div>

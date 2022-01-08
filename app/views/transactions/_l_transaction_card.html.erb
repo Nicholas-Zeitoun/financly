@@ -1,0 +1,45 @@
+<!-- Light/Dark Mode Setting -->
+<% screen_mode = 'light-mode' %>
+<% if user_signed_in? %>
+  <% if (current_user.darkmode) %>
+    <% screen_mode = 'dark-mode' %>
+  <% else %>
+    <% screen_mode = 'light-mode' %>
+  <% end %>
+<% end %>
+
+<!-- Button trigger modal -->
+<div class=" card transaction-card-<%= screen_mode %> ioe-<%= transaction.ioe %> p-4 m-4" data-toggle="modal" data-target="#transaction-<%= transaction.id %>-i">
+  <div class="row d-flex align-items-center">
+    <div class="col-3 transaction-amount-<%= transaction.ioe %> text-center">
+      $<%= '%1.2f' % transaction.amount %>
+    </div>
+    <div class="col-3">
+      <%= transaction.name %>
+    </div>
+    <div class="col-3">
+      <%= transaction.date.strftime("%B, #{transaction.date.day.ordinalize} %Y") %>
+    </div>
+    <div class="col-3">
+      <%= transaction.category %>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="transaction-<%= transaction.id %>-i" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content transaction-modal-<%= screen_mode %> ioe-<%= transaction.ioe %> text-center p-4">
+        <h5 class="modal-title" id="exampleModalLabel"><%= transaction.name %></h5>
+        <div class="transaction-amount-<%= transaction.ioe %>">
+          $<%= '%1.2f' % transaction.amount %>
+        </div>
+        <p class="m-2"><%= transaction.date.strftime("%B, #{transaction.date.day.ordinalize} %Y") %></p>
+        <p class="m-2"><%= transaction.description %></p>
+        <p class="m-2"><%= transaction.category %></p>
+        <a><%= link_to 'Edit', edit_transaction_path(transaction) %></a>
+        <a><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></a>
+
+    </div>
+  </div>
+</div>
